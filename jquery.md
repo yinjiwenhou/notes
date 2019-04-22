@@ -12,3 +12,11 @@
 * HTML DOM遍历和修改
 * Ajax
 * Utilities
+
+## 安装
+```html
+<head>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+</head>
+```
