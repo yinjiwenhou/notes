@@ -1,4 +1,4 @@
-### python 面试题整理[link:https://blog.csdn.net/javahuazaili/article/details/87927181]
+### python 面试题整理 [ https://blog.csdn.net/javahuazaili/article/details/87927181 ]
 
 * 一行代码实现1—100之和
     ```python
@@ -19,7 +19,7 @@
     os, sys, time, re, functools, math
     ```
 
-    * 字典如何删除键和合并两个字典
+* 字典如何删除键和合并两个字典
     ```python
     d1 = {"a": "aaa", "b": "bbb"}
     d2 = {"c": "ccc"}
@@ -28,6 +28,7 @@
     ```
 
 * 谈下python的GIL
+
     全局解释器锁，同一个进程内，在一个单元时间内，解释器只能执行一个线程。
 
 * python实现列表去重的方法
@@ -41,6 +42,7 @@
 * fun(*args,**kwargs)中的*args,**kwargs什么意思？
 
     *args: 不定长度位置参数
+
     **kwargs: 不定长度关键字参数
 
 * python2和python3的range（100）的区别
@@ -81,33 +83,84 @@
     import random
     random.randint(1, 100) # 1-100之前随机的整数
     random。random() # [0. 1) 之间随机的小数
+    # 随机小数？
     ```
 
-15、避免转义给字符串加哪个字母表示原始字符串？
+* 避免转义给字符串加哪个字母表示原始字符串？
+    ```python
+    r''
+    ```
 
-16、<div class="nam">中国</div>，用正则匹配出标签里面的内容（“中国”），其中class的类名是不确定的
+* <div class="nam">中国</div>，用正则匹配出标签里面的内容（“中国”），其中class的类名是不确定的
+    ```python
+    import re
+    # todo
+    ```
 
-17、python中断言方法举例
+* python中断言方法举例
+    ```python
+    assert Ture
+    assert a == b
+    ```
 
-18、数据表student有id,name,score,city字段，其中name中的名字可有重复，需要消除重复行,请写sql语句
+* 数据表student有id,name,score,city字段，其中name中的名字可有重复，需要消除重复行,请写sql语句
+    ```sql
+    # todo
+    ```
 
-19、10个Linux常用命令
+* 10个Linux常用命令
+    ```bash
+    cd, mkdir, mv, touch, chown, chmod, ps, cat, tail, wc, grep, sed, awk
+    ```
 
-20、python2和python3区别？列举5个
+* python2和python3区别？列举5个
+    1. print 等语句全部成了函数
+    2. range 函数的返回值从列表变为的生成器表达式
+    3. python3中新增了**nonlocal**关键字
+    4. 捕获异常不能再使用catch Exception， e， 而是使用catch Exception as e
+    5. reduce函数不再是buildin，移到functools中
 
-21、列出python中可变数据类型和不可变数据类型，并简述原理
+* 列出python中可变数据类型和不可变数据类型，并简述原理
+    1. 不可变类型： tuple， str， int， float
+    2. 可变类型： list， set
 
-22、s = “ajldjlajfdljfddd”，去重并从小到大排序输出”adfjl”
+* s = “ajldjlajfdljfddd”，去重并从小到大排序输出”adfjl”
+    ```python
+    s = “ajldjlajfdljfddd”
+    s_list = list(s)
+    s_set = set(s_list)
+    _s = "".join(sorted(s_set))
+    ```
 
-23、用lambda函数实现两个数相乘
+* 用lambda函数实现两个数相乘
+    ```python
+    lambda x, y: x * y
+    ```
 
-24、字典根据键从小到大排序dict={“name”:”zs”,”age”:18,”city”:”深圳”,”tel”:”1362626627”}
+* 字典根据键从小到大排序dict={“name”:”zs”,”age”:18,”city”:”深圳”,”tel”:”1362626627”}
+    ```python
+    {key: d[key] for key in sorted(d, key=lambda x: x[0])}
+    ```
 
-25、利用collections库的Counter方法统计字符串每个单词出现的次数”kjalfj;ldsjafl;hdsllfdhg;lahfbl;hl;ahlf;h”
+* 利用collections库的Counter方法统计字符串每个单词出现的次数”kjalfj;ldsjafl;hdsllfdhg;lahfbl;hl;ahlf;h”
+    ```python
+    from collections import Counter
+    s = "kjalfj;ldsjafl;hdsllfdhg;lahfbl;hl;ahlf;h"
+    dict(Counter(s))
+    ```
 
-26、字符串a = “not 404 found 张三 99 深圳”，每个词中间是空格，用正则过滤掉英文和数字，最终输出”张三  深圳”
+* 字符串a = “not 404 found 张三 99 深圳”，每个词中间是空格，用正则过滤掉英文和数字，最终输出”张三  深圳”
+    ```python
+    import re
+    a = “not 404 found 张三 99 深圳”
 
-27、filter方法求出列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ```
+
+* filter方法求出列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ```python
+    a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    b = filter(lambda x: x if x % 2 == 1, a)
+    ```
 
 28、列表推导式求列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
