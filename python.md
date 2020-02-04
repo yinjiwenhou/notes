@@ -399,67 +399,203 @@
     2. session：存储在server端，session_id以cookie的形式保存在客户端
 
 * 简述多线程、多进程
-    1. 多线程
-    2. 多进程
+    1. 多线程：进程内包含主线程及其他子线程，但是由于存在GIL，每个CPU时间只能有一个线程执行，各个线程之间可以相互通信及共享数据
+    2. 多进程：每个进程抖拥有独立的进程id及内存空间，不能共享数据。
 
-64、简述any()和all()方法
+* 简述any()和all()方法
+    * any()： 序列中有一个为True及返回True
+    * all()：系列中全部为True，才返回True
 
-65、IOError、AttributeError、ImportError、IndentationError、IndexError、KeyError、SyntaxError、NameError分别代表什么异常
+* IOError、AttributeError、ImportError、IndentationError、IndexError、KeyError、SyntaxError、NameError分别代表什么异常
+    * IOError：输入输出异常
+    * AttributeError：获取属性异常
+    * ImportError： 导入模块异常
+    * IndentationError： 
+    * IndexError：序列循环时索引异常
+    * KeyError： 字典中不存在key的异常
+    * SyntaxError：语法错误
+    * NameError：
 
-66、python中copy和deepcopy区别
+* python中copy和deepcopy区别
 
-67、列出几种魔法方法并简要介绍用途
+    copy():浅拷贝，不可变数据拷贝值，可变数据拷贝内存索引
+    deepcopy(): 深拷贝，可变或是不可变数据都拷贝值
 
-68、C:\Users\ry-wu.junya\Desktop>python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？
+* 列出几种魔法方法并简要介绍用途
+    ```python
+    # todo：什么是魔法方法
+    ```
 
-69、请将[i for i in range(3)]改成生成器
+* C:\Users\ry-wu.junya\Desktop>python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？
+    ```bash
+    ['C:\Users\ry-wu.junya\Desktop>1.py', '22', '33']
+    ```
 
-70、a = “  hehheh  “,去除收尾空格
+* 将[i for i in range(3)]改成生成器
+    ```python
+    (i for i in range(3))
+    ```
 
-71、举例sort和sorted对列表排序，list=[0,-1,3,-10,5,9]
+* a = “  hehheh  “,去除首尾空格
+    ```python
+    a = "  hehheh  "
+    a.strip()
+    ```
 
-72、对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4],使用lambda函数从小到大排序
+* 举例sort和sorted对列表排序，list=[0,-1,3,-10,5,9]
+    ```python
+    list=[0,-1,3,-10,5,9]
+    sorted(list) # 返回排序之后的列表
+    list.sort() # 针对list本身排序
+    ```
 
-73、使用lambda函数对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]，输出结果为
-[0,2,4,8,8,9,-2,-4,-4,-5,-20]，正数从小到大，负数从大到小
+* 对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4],使用lambda函数从小到大排序
+    ```python
+    foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]
+    sorted(foo, lambda x: x) # todo：已经是按照从小到大排序了，题目是什么意思
+    ```
 
-74、列表嵌套字典的排序，分别根据年龄和姓名排序
+* 使用lambda函数对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]，输出结果为[0,2,4,8,8,9,-2,-4,-4,-5,-20]，正数从小到大，负数从大到小
+    ```python
+    foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]
+    sorted(foo, key=lambda x: (x < 0, abs(x))) # todo, key值是怎么判断的？
+    ```
 
-75、列表嵌套元组，分别按字母和数字排序
+* 列表嵌套字典的排序，分别根据年龄和姓名排序
+    ```python
+    foo = [{"name":"zs","age":19},{"name":"ll","age":54},{"name":"wa","age":17},{"name":"df","age":23}]
+    # sort by name 
+    sorted(foo, key=lambda item: item["name"])
+    # sort by age
+    sorted(foo, key=lambda item: item["age"])
+    ```
 
-76、列表嵌套列表排序，年龄数字相同怎么办？
+* 列表嵌套元组，分别按字母和数字排序
+    ```python
+    foo = [("zs",19),("ll",54),("wa",17),("df",23)]
+    # sort by name 
+    sorted(foo, key=lambda item: item[0])
+    # sort by age
+    sorted(foo, key=lambda item: item[1])
+    ```
 
-77、根据键对字典排序（方法一，zip函数）
+* 列表嵌套列表排序，年龄数字相同怎么办？
+    ```python
+    foo = [["zs",19],["ll",23],["wa",23],["df",23]]
+    sorted(foo, key=lambda x: (x[1], x[0]))
+    # key 可以是元组，当第一个值相同时按第二个元素进行排序
+    ```
 
-78、根据键对字典排序（方法二,不用zip)
+* 根据键对字典排序（方法一，zip函数）
+    ```python
+    dic = {"name": "abc", "sex": "man", "city": "xa"}
+    foo = zip(dic.keys(), dic.values())
+    sorted_foo = sorted(foo, key=lambda x: x[0])
+    sorted_dic = {key: dic[key] for key in sorted_foo}
+    ```
 
-79、列表推导式、字典推导式、生成器
+* 据键对字典排序（方法二,不用zip)
+    ```python
+    dic = {"name": "abc", "sex": "man", "city": "xa"}
+    sorted(dic.items(), key=lambda x: x[0])
+    ```
 
-80、最后出一道检验题目，根据字符串长度排序，看排序是否灵活运用
+* 列表推导式、字典推导式、生成器
+    ```python
+    foo = [1, 2, 3, 4]
+    # 列表推导式
+    [item^^2 for item in foo]
+    # 字典推导式
+    {item: item*2 for item in foo}
+    # 生成器
+    (item for item in foo)
+    ```
 
-81、举例说明SQL注入和解决办法
+* 最后出一道检验题目，根据字符串长度排序，看排序是否灵活运用
+    ```python
+    foo = ["aa", "b", "ccc"]
+    sorted(foo, key=lambda x: len(x)) # 返回值为排序后的列表
+    foo.sort(key=len) # 在foo自身上排序，无返回值
+    ```
 
-82、s=”info:xiaoZhang 33 shandong”,用正则切分字符串输出[‘info’, ‘xiaoZhang’, ‘33’, ‘shandong’]
+* 举例说明SQL注入和解决办法
+    ```python
+    # todo
+    ```
 
-83、正则匹配以163.com结尾的邮箱
+* s=”info:xiaoZhang 33 shandong”,用正则切分字符串输出[‘info’, ‘xiaoZhang’, ‘33’, ‘shandong’]
+    ```python
+    # todo
+    ```
 
-84、递归求和
+* 正则匹配以163.com结尾的邮箱
+    ```python
+    # todo
+    ```
 
-85、python字典和json字符串相互转化方法
+* 递归求和
+    ```python
+    def get_sum(x):
+        if x > 0:
+            res = x + get_sum(x-1)
+        else:
+            res = 0
+        return res
+    ```
 
-86、MyISAM 与 InnoDB 区别：
+* python字典和json字符串相互转化方法
+    ```python
+    import json
+    dic = json.load(fp)
+    dic = json.loads(string)
 
-87、统计字符串中某字符出现次数
+    jso = json.dump(fp)
+    jso = json.dumps(dic)
+    ```
 
-88、字符串转化大小写
+* MyISAM 与 InnoDB 区别：
+    ```python
+    # todo
+    ```
 
-89、用两种方法去空格
+* 统计字符串中某字符出现次数
+    ```python
+    foo = "abcdefadees"
+    foo.count('a')
+    ```
 
-90、正则匹配不是以4和7结尾的手机号
+* 字符串转化大小写
+    ```python
+    foo = 'abcABC'
+    foo.upper()
+    foo.lower()
+    ```
 
-91、简述python引用计数机制
+* 用两种方法去空格
+    ```python
+    foo = "abc def ccc"
+    # case 1
+    foo.replace(" ", "")
+    # case 2
+    l = foo.split("")
+    "".join(l)
+    ```
 
-92、int(“1.4”),int(1.4)输出结果？
+* 正则匹配不是以4和7结尾的手机号
+    ```python
+    import re
+    # todo
+    ```
+
+* 简述python引用计数机制
+
+    当有一个变量保存了对象的引用，这个对象的引用计数就会加一。
+
+* int(“1.4”),int(1.4)输出结果？
+    ```python
+    int("1.4") # ValueError
+    int(1.4) # 1
+    ```
 
 93、列举3条以上PEP8编码规范
 
