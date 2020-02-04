@@ -597,38 +597,99 @@
     int(1.4) # 1
     ```
 
-93、列举3条以上PEP8编码规范
+* 列举3条以上PEP8编码规范
+    * 变量名以小写字符命名， 并以下划线分割
+    * 类名首字母大写
+    * 以4个空格缩进
 
-94、正则表达式匹配第一个URL
+* 正则表达式匹配第一个URL
+    ```python
+    import re
+    # todo
+    ```
 
-95、正则匹配中文
+* 正则匹配中文
+    ```python
+    import re
+    # todo
+    ```
 
-96、简述乐观锁和悲观锁
+* 简述乐观锁和悲观锁
+    ```python
 
-97、r、r+、rb、rb+文件打开模式区别
+    ```
 
-98、Linux命令重定向 > 和 >>
+* r、r+、rb、rb+文件打开模式区别
+    ```bash
+    r: 只读模式
+    r+: 读，追加写
+    rb: 二进制方式读
+    rb+: 二进制方式读，追加写
+    ```
 
-99、正则表达式匹配出 <html><h1>www.itcast.cn</h1></html>
+* Linux命令重定向 > 和 >>
+    ```bash
+    >: 覆盖写
+    >>： 追加写
+    ```
 
-100、python传参数是传值还是传址？
+* 正则表达式匹配出 &#60;html&#62;&#60;h1&#62;www.itcast.cn&#60;/h1&#62;&#60;/html&#62;
+    ```python
+    import re
+    # todo
+    ```
 
-101、求两个列表的交集、差集、并集
+* python传参数是传值还是传址？
 
-102、生成0-100的随机数
+    可变数据是传址，不可变数据是传值
 
-103、lambda匿名函数好处
+* 求两个列表的交集、差集、并集
+    ```python
+    foo = ['a', 'b', 'c']
+    bar = ['b', 'c', 'e']
 
-104、常见的网络传输协议
+    # 交集
+    a = [item for item in foo if item in bar]
 
-105、单引号、双引号、三引号用法
+    # 差集
+    b = [item for item in foo if item not in bar]
+    b = [item for item in bar if item not in foo]
 
-106、python垃圾回收机制
+    # 并集
+    foo + [item for item in bar if item not in foo]
+    ```
 
-107、HTTP请求中get和post区别
+* 生成0-100的随机数
+    ```python
+    import random
+    random.randint(1, 100)
+    ```
 
-108、python中读取Excel文件的方法
+* lambda匿名函数好处
 
-109、简述多线程、多进程
+    结合高阶函数，定义简单的函数体
 
-110、python正则中search和match
+* 常见的网络传输协议
+
+    tcp, udp, http, sftp
+
+* 单引号、双引号、三引号用法
+
+    单引号，双引号用于定义字符串
+    三引号定义文档
+
+* python垃圾回收机制
+
+    一个对象引用计数为0后会将回收该对象
+
+* HTTP请求中get和post区别
+
+    get用于请求数据，请求参数可以跟在url的 ? 后面
+    post用于向服务器提交数据，提交的数据在请求的data字段中
+
+* python正则中search和match
+    ```python
+    import re
+    re.match # todo
+    re.search # todo
+    ```
