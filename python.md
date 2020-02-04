@@ -396,39 +396,71 @@
 
 * 简述cookie和session的区别
     1. cookie: 存储在浏览器端
-    2. session：存储在server端
-63、简述多线程、多进程
+    2. session：存储在server端，session_id以cookie的形式保存在客户端
+
+* 简述多线程、多进程
+    1. 多线程
+    2. 多进程
+
 64、简述any()和all()方法
+
 65、IOError、AttributeError、ImportError、IndentationError、IndexError、KeyError、SyntaxError、NameError分别代表什么异常
+
 66、python中copy和deepcopy区别
+
 67、列出几种魔法方法并简要介绍用途
+
 68、C:\Users\ry-wu.junya\Desktop>python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？
+
 69、请将[i for i in range(3)]改成生成器
+
 70、a = “  hehheh  “,去除收尾空格
+
 71、举例sort和sorted对列表排序，list=[0,-1,3,-10,5,9]
+
 72、对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4],使用lambda函数从小到大排序
+
 73、使用lambda函数对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]，输出结果为
 [0,2,4,8,8,9,-2,-4,-4,-5,-20]，正数从小到大，负数从大到小
+
 74、列表嵌套字典的排序，分别根据年龄和姓名排序
+
 75、列表嵌套元组，分别按字母和数字排序
+
 76、列表嵌套列表排序，年龄数字相同怎么办？
+
 77、根据键对字典排序（方法一，zip函数）
+
 78、根据键对字典排序（方法二,不用zip)
+
 79、列表推导式、字典推导式、生成器
+
 80、最后出一道检验题目，根据字符串长度排序，看排序是否灵活运用
+
 81、举例说明SQL注入和解决办法
+
 82、s=”info:xiaoZhang 33 shandong”,用正则切分字符串输出[‘info’, ‘xiaoZhang’, ‘33’, ‘shandong’]
+
 83、正则匹配以163.com结尾的邮箱
+
 84、递归求和
+
 85、python字典和json字符串相互转化方法
+
 86、MyISAM 与 InnoDB 区别：
+
 87、统计字符串中某字符出现次数
+
 88、字符串转化大小写
+
 89、用两种方法去空格
+
 90、正则匹配不是以4和7结尾的手机号
+
 91、简述python引用计数机制
 
 92、int(“1.4”),int(1.4)输出结果？
+
 93、列举3条以上PEP8编码规范
 
 94、正则表达式匹配第一个URL
@@ -445,14 +477,22 @@
 
 100、python传参数是传值还是传址？
 
-
 101、求两个列表的交集、差集、并集
+
 102、生成0-100的随机数
+
 103、lambda匿名函数好处
+
 104、常见的网络传输协议
+
 105、单引号、双引号、三引号用法
+
 106、python垃圾回收机制
+
 107、HTTP请求中get和post区别
+
 108、python中读取Excel文件的方法
+
 109、简述多线程、多进程
+
 110、python正则中search和match
