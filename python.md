@@ -172,7 +172,7 @@
 * filter方法求出列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     ```python
     a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    b = filter(lambda x: x % 2 == 1, a)
+    b = filter(lambda x: x % 2 == 1, a) # filter 接受的函数只需返回True/False
     ```
 
 * 列表推导式求列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -184,7 +184,7 @@
 * 正则re.complie作用
     ```python
     import re
-    re.complite() # 编译正则表达式
+    re.complite() # 编译正则表达式，得到正则表达式对象
     ```
 
 * a=（1，）b=(1)，c=(“1”) 分别是什么类型的数据？
@@ -211,24 +211,24 @@
     # linux
     import commands
     cmd = 'rm -rf %s' % file_path
-    s, o = commands.getsatusoutput(cmd)
+    s, o = commands.getstatusoutput(cmd)
     os.system(cmd)
     ```
 
 * log日志中，我们需要用时间戳记录error,warning等的发生时间，请用datetime模块打印当前时间戳 “2018-04-01 11:38:54”
     ```python
     import datetime
-    # todo
+    datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     ```
 
 * 数据库优化查询方法
-    ```sql
-    # todo
-    ```
+    
+    外键， 索引，联合查询， 选择特定字符
 
 * 请列出你会的任意一种统计图（条形图、折线图等）绘制的开源库，第三方也行
     ```python
-    import mathplotlib
+    import matplotlib
+    import pychart
     ```
 
 * 写一段自定义异常代码
@@ -238,12 +238,21 @@
             return "my exception."
     ```
 
-* 正则表达式匹配中，（.）和（.?）匹配区别？
+* 正则表达式匹配中，（.）和（.*?）匹配区别？
+    
+    (.*): 贪婪匹配， 会把满足正则表达式的尽可能多的往后匹配
+
+    (.*?): 非贪婪匹配，会把满足正则表达式的尽可能少的匹配
     ```python
-    # todo
+    import re
+    s = '<p>哈哈</p><p>呵呵</p>'
+    re.findall(r'<p>(.*)</p>', s) # ['哈哈</p><p>呵呵']
+    re.findall(r'<p>(.*?)</p>', s) # ['哈哈', '呵呵']
     ```
 
 * 简述Django的orm
+
+    实现了数据模型和数据库的解耦， 通过简单的配置就能更换数据库。
     1. orm 关系对象映射；
     2. python一个类（继承自model）对应数据库一张表；
     3. 上述类的一个实例对应数据表中一条数据记录。
@@ -284,8 +293,9 @@
 * 举例说明zip（）函数用法
     ```python
     a = [1, 2, 3]
-    b = [6, 5, 4]
-    for item_a, item_b in zip(a, b): # 同步循环序列a， b
+    b = [6, 5, 4, 100]
+    # 同步循环序列a， b。 长度不一致时以较短的为主
+    for item_a, item_b in zip(a, b): #zip函数返回元组
         print(item_a + item_b)
     # 7, 7, 7
     ```
@@ -293,7 +303,8 @@
 * a=”张明 98分”，用re.sub，将98替换为100
     ```python
     import re
-    # todo
+    a = "张明 98分"
+    re.sub(r'98', '100', a)
     ```
 
 * 写5条常用sql语句
@@ -311,8 +322,8 @@
     ```python
     a="hello"
     b="你好"
-    a_byte = bytes(a, 'utf-8')
-    b_byte = bytes(b, 'utf-8')
+    a_byte = bytes(a, 'utf-8') # a = b'hello'
+    b_byte = bytes(b, 'utf-8') # b = "你好".encode()
     ```
 
 * [1,2,3]+[4,5,6]的结果是多少？
@@ -321,11 +332,15 @@
     ```
 
 * 提高python运行效率的方法
-    1. #todo
+    1. 使用生成器，可以节约内存；
+    2. 循环代码优化， 避免过多重复代码执行
+    3. 核心模块用Cython， PyPy
+    4. 多线程，多进程，协程
+    5. 多个if elif条件判断，把最有可能的情况放在最前面
 
 * 简述mysql和redis区别
     1. mysql是关系型数据库， redis是非关系型数据库
-    2. redis是内存型的数据库，访问速度更快，对硬件要求更高
+    2. redis是内存型的数据库，访问速度更快，对硬件要求更高， mysql存储在磁盘上，访问速度稍慢。
 
 * 遇到bug如何处理
     1. 分析日志（logging模块记录的log文件）
@@ -334,11 +349,14 @@
 
 * 正则匹配，匹配日期2018-03-20
     
-    url=’https://sycm.taobao.com/bda/tradinganaly/overview/get_summary.json?dateRange=2018-03-20%7C2018-03-20&dateType=recent1&device=1&token=ff25b109b&_=1521595613462‘
+    
 
     ```python
     import re
-    re_str = "[0-9]{4}-[0-9]{2}-[0-9]{2}"
+    url='https://sycm.taobao.com/bda/tradinganaly/overview/get_summary.json?dateRange=2018-03-20%7C2018-03-20&dateType=recent1&device=1&token=ff25b109b&_=1521595613462'
+    re_str = "2018-03-20"
+    regx = re.complite(re_str)
+    re.match(regx, url)
     ```
 
 * list=[2,3,5,4,9,6]，从小到大排序，不许用sort，输出[2,3,4,5,6,9]
@@ -349,6 +367,20 @@
             if test_list[i] > test_list[j+i+1]:
                 test_list[i], test_list[j+i+1] = test_list[j+i+1], test_list[i]
     print(test_list)
+    ```
+
+    ```python
+    test_list = [2,3,5,4,9,6]
+    s_list = []
+    def get_min(l):
+        a = min(l)
+        l.remove(a)
+        a_list.append(a)
+
+        if len(l) > 0:
+            get_min(l)
+    get_min(test_list)
+    print(s_list)
     ```
 
 * 写一个单例模式
@@ -368,21 +400,42 @@
 * 保留两位小数
 
     题目本身只有a=”%.03f”%1.3335,让计算a的结果，为了扩充保留小数的思路，提供round方法（数值，保留位数）
+    ```python
+    a = '%.03f' % 1.3335 # 1.335
+    b = round(float(a), 2) # 1.33
+    b = round(float(a) 1) # 1.3
+    ```
 
 * 求三个方法打印结果
 
-    **todo**
+    ```python
+    def fn(k, v, dic={}):
+        dic[k] = v
+        print(dic)
+
+    fn("one", 1)
+    fn("two", 2)
+    fn("three", 3, {})
+    ```
+
+    ```bash
+    {"one": 1}
+    {"one": 1, "two": 2}
+    {"three": 3}
+    ```
 
 * 列出常见的状态码和意义
     * 200 ok
+    * 400 bad request
+    * 401 unauthoritied
     * 404 not found
     * 403 permission denied.
     * 503 server error
 
 * 分别从前端、后端、数据库阐述web项目的性能优化
-    1. 前端：按路由拆分页面，不要一次性加载所有的js
-    2. 后端：异步处理耗时操作
-    3. 数据库：使用内存型数据库缓存session等经常访问的数据
+    1. 前端：减少HTTP请求；按路由拆分页面，不要一次性加载所有的js
+    2. 后端：异步处理耗时操作；缓存变化少，请求次数多的数据；
+    3. 数据库：使用内存型数据库缓存session等经常访问的数据；建立索引，外键
 
 * 使用pop和del删除字典中的”name”字段，dic={“name”:”zs”,”age”:18}
     ```python
@@ -393,7 +446,7 @@
 
 * 列出常见MYSQL数据存储引擎
     ```python
-    PyMysql
+    InnoDB， MyISAM， MEMORY
     ```
 
 * 计算代码运行结果，zip函数历史文章已经说了，得出[(“a”,1),(“b”,2)，(“c”,3),(“d”,4),(“e”,5)]
@@ -405,15 +458,22 @@
 
 * 简述同源策略
     
-    **todo**
+    1. 协议相同
+    2. 域名相同
+    3. 端口相同
 
 * 简述cookie和session的区别
-    1. cookie: 存储在浏览器端
+    1. cookie: 存储在浏览器端，安全性比session差。
     2. session：存储在server端，session_id以cookie的形式保存在客户端
 
 * 简述多线程、多进程
-    1. 多线程：进程内包含主线程及其他子线程，但是由于存在GIL，每个CPU时间只能有一个线程执行，各个线程之间可以相互通信及共享数据
-    2. 多进程：每个进程抖拥有独立的进程id及内存空间，不能共享数据。
+
+    进程：操作系统进行资源分配和调度的基本单位，多个进程之间相互独立；稳定性好，如果一个进程崩溃，其他进程不受影响；但是进程消耗资源大，开启的进程数有限；
+
+    线程：CPU进行资源分配和调度的基本单位，线程是进程的一部分。是比进程更小的能独立运行的基本单位。一个进程下的多个线程可以共享该进程的所有资源。
+
+    1. 多线程：进程内包含主线程及其他子线程，但是由于存在GIL，每个CPU时间只能有一个线程执行，各个线程之间可以相互通信及共享数据。适用于IO密集型。
+    2. 多进程：每个进程抖拥有独立的进程id及内存空间，不能共享数据。适用于CPU密集型。
 
 * 简述any()和all()方法
     * any()： 序列中有一个为True及返回True
@@ -421,13 +481,13 @@
 
 * IOError、AttributeError、ImportError、IndentationError、IndexError、KeyError、SyntaxError、NameError分别代表什么异常
     * IOError：输入输出异常
-    * AttributeError：获取属性异常
-    * ImportError： 导入模块异常
-    * IndentationError： 
-    * IndexError：序列循环时索引异常
+    * AttributeError：试图访问一个对象没有的属性
+    * ImportError： 导入模块或包异常
+    * IndentationError： 语法错误，代码没有正确对齐
+    * IndexError：下标超过索引
     * KeyError： 字典中不存在key的异常
-    * SyntaxError：语法错误
-    * NameError：
+    * SyntaxError：语法错误，不能执行
+    * NameError：使用一个还未赋予对象的变量
 
 * python中copy和deepcopy区别
 
@@ -435,13 +495,16 @@
     deepcopy(): 深拷贝，可变或是不可变数据都拷贝值
 
 * 列出几种魔法方法并简要介绍用途
-    ```python
-    # todo：什么是魔法方法
-    ```
+    
+    1. __init__:对象初始化方法
+    2. __new__: 创建对象的时候调用的方法
+    3. __del__: 删除对象的时候调用的方法
+    4. __call__: 直接将实例作为方法调用的时候调用的方法
+    
 
 * C:\Users\ry-wu.junya\Desktop>python 1.py 22 33命令行启动程序并传参，print(sys.argv)会输出什么数据？
     ```bash
-    ['C:\Users\ry-wu.junya\Desktop>1.py', '22', '33']
+    ['1.py', '22', '33']
     ```
 
 * 将[i for i in range(3)]改成生成器
@@ -465,13 +528,13 @@
 * 对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4],使用lambda函数从小到大排序
     ```python
     foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]
-    sorted(foo, lambda x: x) # todo：已经是按照从小到大排序了，题目是什么意思
+    sorted(foo, key=lambda x: x)
     ```
 
 * 使用lambda函数对list排序foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]，输出结果为[0,2,4,8,8,9,-2,-4,-4,-5,-20]，正数从小到大，负数从大到小
     ```python
     foo = [-5,8,0,4,9,-4,-20,-2,8,2,-4]
-    sorted(foo, key=lambda x: (x < 0, abs(x))) # todo, key值是怎么判断的？
+    sorted(foo, key=lambda x: (x < 0, abs(x))) # key 可以是元组，当元组第一个值相同的时候使用第二值为依据，对第一个值相同的数据进行局部排序；
     ```
 
 * 列表嵌套字典的排序，分别根据年龄和姓名排序
@@ -538,12 +601,16 @@
 
 * s=”info:xiaoZhang 33 shandong”,用正则切分字符串输出[‘info’, ‘xiaoZhang’, ‘33’, ‘shandong’]
     ```python
-    # todo
+    import re
+    s = "info:xiaoZhang 33 shandong"
+    re.split("\s|:",s)
     ```
 
 * 正则匹配以163.com结尾的邮箱
     ```python
-    # todo
+    import re
+    email = "123123abc@163.com"
+    re.match(r'@163.com$', email)
     ```
 
 * 递归求和
@@ -597,7 +664,9 @@
 * 正则匹配不是以4和7结尾的手机号
     ```python
     import re
-    # todo
+    email = "aaa123bbb@163.com"
+    ret = re.match(r'[\w]*@163.com$', email)
+    print(ret.group())
     ```
 
 * 简述python引用计数机制
