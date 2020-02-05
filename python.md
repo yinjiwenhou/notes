@@ -2,7 +2,10 @@
 
 * 一行代码实现1—100之和
     ```python
+    # use reduce
     reduce(lambda x, y: x + y, xrange(1, 101))
+
+    # use sum
     sum(range(1, 101))
     ```
 
@@ -11,12 +14,12 @@
     global VAR
     def foo():
         global VAR
-        VAR = VAR+1
+        VAR = VAR + 1
     ```
 
 * 列出5个python标准库
     ```python
-    os, sys, time, re, functools, math
+    os, sys, time, datetime, re, math, logging
     ```
 
 * 字典如何删除键和合并两个字典
@@ -29,7 +32,9 @@
 
 * 谈下python的GIL
 
-    全局解释器锁，同一个进程内，在一个单元时间内，解释器只能执行一个线程。
+    全局解释器锁，同一个进程内如果多个线程运行，一个线程在运行python程序的时候会通过加锁霸占python解释器， 是得该进程内的其他线程无法运行。
+    需等待该线程执行完成之后才能运行。如果线程运行过程中遇到耗时操作，则解释器锁解开，是其他线程运行。
+    所以在多线程中，线程的运行还是有先后顺序的，并不是同时执行的。
 
 * python实现列表去重的方法
     ```python
@@ -41,14 +46,16 @@
 
 * fun(*args,**kwargs)中的*args,**kwargs什么意思？
 
+    两者都是用于函数定义。
+
     *args: 不定长度位置参数
 
     **kwargs: 不定长度关键字参数
 
 * python2和python3的range（100）的区别
 
-    python2: 得到真实的列表
-    python3：generate对象，通过循环迭代或是next函数获取
+    python2: 得到真实的列表。
+    python3：generate对象，通过循环迭代或是next函数获取。
 
 * 一句话解释什么样的语言能够用装饰器?
 
@@ -56,14 +63,18 @@
 
 * python内建数据类型有哪些
     ```python
-    int, float, bool, str, function, 
+    int, float, bool, str, tuple, list, dict, set
     ```
 
 * 简述面向对象中__new__和__init__区别
-    __new__: 新创建实例时调用，在__init__之前执行，
-    __init__: 接受创建新实例时需要的参数。
+
+    __new__: 至少有一个cls参数，代表当前类。必须要有返回值，返回实例化出来的实例。新创建实例时调用，在__init__之前执行，
+    
+    __init__: 至少有一个self参数，就是__new__中返回的实例，还可以有其他的参数用于初始化实例。不需要返回值。
+    如果__new__中返回的就是当前类的实例，__init__会被自动调用。
 
 * 简述with方法打开处理文件帮我我们做了什么？
+
     with处理上下文管理器，帮助我们在程序进入上下文管理器时创建对象，在推出上下文管理器的时候销毁对象。
 
     实现上下文管理器的方式：
@@ -91,10 +102,10 @@
     r''
     ```
 
-* <div class="nam">中国</div>，用正则匹配出标签里面的内容（“中国”），其中class的类名是不确定的
+* &#60;div class="nam">中国&#60;/div>，用正则匹配出标签里面的内容（“中国”），其中class的类名是不确定的
     ```python
     import re
-    # todo
+    re.findall(r'<div class=”.*”>(.*?)</div>', a) # ['中国']
     ```
 
 * python中断言方法举例
@@ -105,7 +116,7 @@
 
 * 数据表student有id,name,score,city字段，其中name中的名字可有重复，需要消除重复行,请写sql语句
     ```sql
-    # todo
+    select distinct name from student;
     ```
 
 * 10个Linux常用命令
@@ -116,13 +127,14 @@
 * python2和python3区别？列举5个
     1. print 等语句全部成了函数
     2. range 函数的返回值从列表变为的生成器表达式
-    3. python3中新增了**nonlocal**关键字
+    3. python3中新增了 **nonlocal** 关键字
     4. 捕获异常不能再使用catch Exception， e， 而是使用catch Exception as e
     5. reduce函数不再是buildin，移到functools中
+    6. python2使用ascii编码，python3使用unicode编码
 
 * 列出python中可变数据类型和不可变数据类型，并简述原理
     1. 不可变类型： tuple， str， int， float
-    2. 可变类型： list， set
+    2. 可变类型： list， dict
 
 * s = “ajldjlajfdljfddd”，去重并从小到大排序输出”adfjl”
     ```python
@@ -139,6 +151,7 @@
 
 * 字典根据键从小到大排序dict={“name”:”zs”,”age”:18,”city”:”深圳”,”tel”:”1362626627”}
     ```python
+    d = {"name":"zs","age":18,"city":"深圳","tel":"1362626627"}
     {key: d[key] for key in sorted(d, key=lambda x: x[0])}
     ```
 
@@ -152,8 +165,8 @@
 * 字符串a = “not 404 found 张三 99 深圳”，每个词中间是空格，用正则过滤掉英文和数字，最终输出”张三  深圳”
     ```python
     import re
-    a = “not 404 found 张三 99 深圳”
-
+    a = "not 404 found 张三 99 深圳"
+    re.sub(r'[a-zA-Z0-9]+\s', '', a)
     ```
 
 * filter方法求出列表所有奇数并构造新列表，a =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
