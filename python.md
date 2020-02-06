@@ -687,38 +687,48 @@
 * 正则表达式匹配第一个URL
     ```python
     import re
-    # todo
+    foo = '<img title="aaa" class="aligncenter lazyloaded" style="box-sizing: border-box !important;word-wrap: break-word !important;width: 99%;visibility: visible !important;height: auto !important;box-shadow: rgb(170, 170, 170) 0em 0em 1em 0px;border-radius: 6px;" alt="110道python面试题，你会几个？" src="https://www.01hai.com/wp-content/uploads/2019/08/01hai8-1566225813.jpg" data-src="https://www.01hai.com/wp-content/uploads/2019/08/01hai8-1566225813.jpg">'
+    re.findall(r'https://.*?\.jpg', foo)
+    res = re.search(r'https://.*?\.jpg', foo)
+    res.group()
     ```
+    
 
 * 正则匹配中文
     ```python
     import re
-    # todo
+    foo = '你好 hello 世界 world'
+    pattern = re.compile(r'[\u4e00-\u9fa5]+')
+    res = pattern.findall(foo)
+    print(res)
     ```
 
 * 简述乐观锁和悲观锁
-    ```python
+    
+    悲观锁：每次拿数据的时候都会认为别人会修改数据，所以每次那数据的时候都上锁。
 
-    ```
+    乐观锁：每次拿数据的时候都认为别人不会修改数据，所以不上锁。但是在更新数据的时候会判断下在此期间别人有没有更新数据。
 
 * r、r+、rb、rb+文件打开模式区别
     ```bash
-    r: 只读模式
-    r+: 读，追加写
-    rb: 二进制方式读
-    rb+: 二进制方式读，追加写
+    r: 只读模式（文件的指针在文件的开头）
+    r+: 读，追加写（文件的指针在文件的开头）
+    rb: 二进制方式打开，只读（文件的指针在文件的开头）
+    rb+: 二进制方式读，追加写（文件的指针在文件的开头）
     ```
 
 * Linux命令重定向 > 和 >>
     ```bash
     >: 覆盖写
-    >>： 追加写
+    >>： 追加写，追加到尾部
     ```
 
-* 正则表达式匹配出 &#60;html&#62;&#60;h1&#62;www.itcast.cn&#60;/h1&#62;&#60;/html&#62;
+* 正则表达式匹配出 ```<html><h1>www.itcast.cn</h1></html>```
     ```python
     import re
-    # todo
+    foo = '<html><h1>www.itcast.cn</h1></html>'
+    ret = re.match(r'<(\w*)><(\w*)>.*?</\2></\1>', foo)
+    res.group()
     ```
 
 * python传参数是传值还是传址？
@@ -745,6 +755,7 @@
     ```python
     import random
     random.randint(1, 100)
+    random.choice(range(1, 101))
     ```
 
 * lambda匿名函数好处
@@ -753,25 +764,47 @@
 
 * 常见的网络传输协议
 
-    tcp, udp, http, sftp
+    tcp, udp, http, sftp, smtp
 
 * 单引号、双引号、三引号用法
 
     单引号，双引号用于定义字符串
-    三引号定义文档
+    三引号可以分开多行书写， 常用于定义文档；
 
 * python垃圾回收机制
 
-    一个对象引用计数为0后会将回收该对象
+    垃圾回收以引用计数为主， 标记-清除和分代清除为辅， 其中标记-清除和分代清除为了处理循环引用的难题。
+    
+    当一个变量保存了一个对象的引用时， 此对象的引用对象计数加1。 当使用del删除变量的引用时，此对象的引用计数减1. 一个对象引用计数为0后会将回收该对象；
 
 * HTTP请求中get和post区别
 
-    get用于请求数据，请求参数可以跟在url的 ? 后面
+    get用于请求数据，请求参数可以跟在url里面。安全性比post差。
     post用于向服务器提交数据，提交的数据在请求的data字段中
 
 * python正则中search和match
     ```python
     import re
-    re.match # todo
-    re.search # todo
+    ret = re.match # 只检测字符串开头是否匹配
+    ret = re.search # 会在整个字符串中查找，检测到第一个匹配到的数据
+
+    ret.group() # 匹配结果都需要使用group
+
+    # 返回所有满足匹配条件的结果，放在列表里
+    re.findall("a", "a aa ab ac") # ['a', 'a', 'a', 'a', 'a']
+
+    # 先按'a'分割得到''和'bcd',在对''和'bcd'分别按'b'分割
+    print(re.split('[ab]', 'abcd')) # ['', '', 'cd']
+
+    # 将数字替换成'H'，参数1表示只替换1个
+    ret = re.sub('\d', 'H', 'eva3egon4yuan4', 1) #evaHegon4yuan4
+    
+    # 将数字替换成'H'，返回元组(替换的结果,替换了多少次)
+    ret = re.subn('\d', 'H', 'eva3egon4yuan4') # ('evaHegonHyuanH', 3)
+
+    # 将正则表达式编译成为一个 正则表达式对象
+    pattern = re.compile('\d{3}')
+
+    # finditer返回一个存放匹配结果的迭代器
+    ret = re.finditer('\d', 'ds3sy4784a')   
     ```
